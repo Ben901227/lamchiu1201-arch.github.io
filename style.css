@@ -273,14 +273,146 @@ gap:40px;
 
 .blog-card{
 background:white;
-padding:25px;
+padding:0 0 25px;
 box-shadow:0 10px 30px rgba(0,0,0,0.08);
+border-radius:6px;
+overflow:hidden;
+display:flex;
+flex-direction:column;
+transition:transform .25s ease, box-shadow .25s ease;
 }
 
+.blog-card:hover{
+transform:translateY(-4px);
+box-shadow:0 16px 40px rgba(0,0,0,0.12);
+}
+
+.blog-card > *:not(img){
+margin-left:25px;
+margin-right:25px;
+}
+
+/* 統一 3:2 比例裁切，圖片載入前就佔好位置，避免版面跳動 */
 .blog-card img{
+display:block;
 width:100%;
-padding:0px;
+height:auto;
+aspect-ratio:3/2;
+object-fit:cover;
+background:#eef0ee;
 margin-bottom:20px;
+transition:transform .4s ease;
+}
+
+.blog-card:hover img{
+transform:scale(1.03);
+}
+
+.blog-card .card-meta{
+font-size:13px;
+color:#666;
+letter-spacing:1px;
+margin-bottom:6px;
+}
+
+/* 分類篩選 */
+
+.blog-filter{
+display:flex;
+gap:10px;
+margin-bottom:36px;
+overflow-x:auto;
+scrollbar-width:none;
+scroll-margin-top:120px;
+}
+
+.blog-filter::-webkit-scrollbar{
+display:none;
+}
+
+.blog-filter a{
+flex:none;
+min-height:44px;
+padding:0 22px;
+display:inline-flex;
+align-items:center;
+border-radius:22px;
+border:1px solid #d5dad5;
+background:#fff;
+color:#2f3f2f;
+font-size:15px;
+letter-spacing:1px;
+text-decoration:none;
+transition:background .2s ease, color .2s ease, border-color .2s ease;
+}
+
+.blog-filter a:hover{
+background:#eef0ee;
+}
+
+.blog-filter a[aria-current]{
+background:#2f3f2f;
+border-color:#2f3f2f;
+color:#fff;
+}
+
+.blog-filter a:focus-visible, .pagination a:focus-visible{
+outline:2px solid #2f3f2f;
+outline-offset:2px;
+}
+
+.blog-card a{
+margin-top:auto;
+}
+
+.blog-card[hidden]{
+display:none;
+}
+
+/* 分頁 */
+
+.pagination{
+display:flex;
+justify-content:center;
+gap:8px;
+margin-top:60px;
+}
+
+.pagination a{
+min-width:44px;
+height:44px;
+display:inline-flex;
+align-items:center;
+justify-content:center;
+border-radius:22px;
+text-decoration:none;
+color:#2f3f2f;
+border:1px solid #d5dad5;
+transition:background .2s ease, color .2s ease;
+}
+
+.pagination a:hover{
+background:#eef0ee;
+}
+
+.pagination a[aria-current="page"]{
+background:#2f3f2f;
+color:white;
+border-color:#2f3f2f;
+}
+
+.pagination a[aria-disabled="true"]{
+opacity:.35;
+pointer-events:none;
+}
+
+@media (prefers-reduced-motion:reduce){
+.blog-card, .blog-card img{transition:none;}
+.blog-card:hover, .blog-card:hover img{transform:none;}
+}
+
+@media (max-width:768px){
+.blog{padding:120px 16px 60px;}
 }
 
 .blog-card h3{
